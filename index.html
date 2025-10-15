@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generative AI for Work & Research — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1020;
+      --bg2:#0f142a;
+      --text:#e8ecf8;
+      --muted:#b7c0d1;
+      --accent1: #6ea8ff;
+      --accent2: #b37bff;
+      --accent3: #5ce1e6;
+      --card:#101733aa;
+      --card-solid:#131a36;
+      --glass: rgba(255,255,255,.06);
+      --ring: rgba(108, 170, 255, .35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 3px 10px rgba(0,0,0,.25);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text); background:
+        radial-gradient(1200px 800px at 90% -10%, #1b2a5a 0%, transparent 60%),
+        radial-gradient(1000px 600px at -10% 10%, #1b3a3a 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      font: 16px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      scroll-behavior:smooth;
+    }
+    a{color:var(--accent3); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(1100px, 90vw); margin-inline:auto}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(10,15,30,.75), rgba(10,15,30,.35));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{display:flex; align-items:center; gap:24px; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px}
+    .logo{width:28px; height:28px; display:grid; place-items:center; border-radius:9px; box-shadow: var(--shadow);
+      background: conic-gradient(from 180deg at 50% 50%, var(--accent1), var(--accent2), var(--accent3), var(--accent1));
+      outline: 2px solid rgba(255,255,255,.08)
+    }
+    .navlinks{margin-left:auto; display:flex; gap:18px; flex-wrap:wrap}
+    .navlinks a{padding:8px 12px; border-radius:10px; color:var(--text); opacity:.85; border:1px solid transparent}
+    .navlinks a:hover{opacity:1; border-color: rgba(255,255,255,.08); background:rgba(255,255,255,.04)}
+
+    /* HERO */
+    .hero{position:relative; padding:72px 0 40px}
+    .orb{position:absolute; width:560px; height:560px; filter: blur(55px); opacity:.5; pointer-events:none}
+    .orb.one{right:-160px; top:-120px; background: radial-gradient(circle at 30% 30%, var(--accent1), transparent 60%)}
+    .orb.two{left:-120px; bottom:-120px; background: radial-gradient(circle at 70% 70%, var(--accent2), transparent 60%)}
+    .hero-card{
+      position:relative; border-radius: clamp(16px, 2vw, 24px);
+      background: linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08); padding:32px; box-shadow: var(--shadow)
+    }
+    .badge{display:inline-flex; gap:8px; align-items:center; color:var(--muted); font-size:.85rem; background:rgba(255,255,255,.06); padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.08)}
+    .h1{font-family:"Plus Jakarta Sans", Inter, sans-serif; font-weight:800; line-height:1.1; font-size: clamp(28px, 4.6vw, 54px); margin:14px 0}
+    .lead{color:#d6dcf0; font-size: clamp(14px, 1.6vw, 18px)}
+    .cta-row{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); color:var(--text); box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg, var(--accent1), var(--accent2)); border:none}
+
+    /* SECTIONS */
+    section{padding:64px 0}
+    .section-title{font-family:"Plus Jakarta Sans"; font-weight:800; letter-spacing:.2px; font-size: clamp(20px, 2.4vw, 32px); margin:0 0 18px}
+    .section-desc{color:var(--muted); max-width:72ch}
+
+    .grid{display:grid; gap:18px}
+    .grid.cols-3{grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))}
+    .grid.cols-2{grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))}
+
+    .card{background: var(--glass); border:1px solid rgba(255,255,255,.08); padding:22px; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card h3{margin-top:0}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.06); font-size:.85rem; color:#e4ebff}
+
+    .list{margin:10px 0 0 0; padding:0 0 0 18px}
+    .list li{margin:6px 0}
+
+    /* TIMELINE */
+    .timeline{position:relative; margin-top:10px}
+    .timeline::before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent3), transparent)}
+    .tl-item{position:relative; margin-left:30px; padding-left:16px; padding-bottom:16px}
+    .tl-dot{position:absolute; left:-4px; top:2px; width:12px; height:12px; border-radius:50%; background:linear-gradient(135deg, var(--accent3), var(--accent2)); box-shadow:0 0 0 3px rgba(92,225,230,.2)}
+
+    /* FOOTER */
+    footer{padding:36px 0 56px; color:var(--muted); border-top:1px solid rgba(255,255,255,.08)}
+    .footer-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap}
+
+    /* UTIL */
+    .kpis{display:flex; gap:18px; flex-wrap:wrap; margin-top:18px}
+    .kpi{min-width:160px; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); box-shadow: var(--shadow)}
+    .kpi .n{font-weight:800; font-size:22px}
+    .muted{color:var(--muted)}
+    .divider{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); margin:28px 0}
+
+    /* RESPONSIVE */
+    @media (max-width:600px){
+      .navlinks{display:none}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Generative AI for Work & Research</span>
+      </div>
+      <div class="navlinks">
+        <a href="#about-me">About me</a>
+        <a href="#about-course">About the course</a>
+        <a href="#submissions">Weekly submissions</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="container">
+      <div class="hero-card">
+        <span class="badge">One‑page portfolio • Live cohort</span>
+        <h1 class="h1">Designing practical AI for <span style="background:linear-gradient(90deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent">work & research</span></h1>
+        <p class="lead">I’m Dr. Aung Paing Soe — a Singapore‑based physician and digital‑health product leader. I build AI‑powered tools and field programs that improve access to care across Asia and Africa.</p>
+        <div class="kpis">
+          <div class="kpi"><div class="n">US$1.5M</div><div class="muted">Portfolio managed</div></div>
+          <div class="kpi"><div class="n">2.3M+</div><div class="muted">People reached</div></div>
+          <div class="kpi"><div class="n">6+</div><div class="muted">Countries of work</div></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn primary" href="#submissions">View weekly submissions</a>
+          <a class="btn" href="#about-course">Explore the course</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about-me">
+      <div class="container">
+        <h2 class="section-title">About me</h2>
+        <p class="section-desc">Medical doctor with dual master’s degrees (MPA, MSc Global Health). Senior Manager for Digital Health & Product at reach52, leading cross‑country teams, agile software delivery, and AI solutions for low‑access settings. Previously with FAO, WHO, Burnet Institute, and Karolinska Institutet. Awards include the Li Ka Shing Foundation Scholarship and the Swedish Institute Scholarship.</p>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <h3>Current role</h3>
+            <ul class="list">
+              <li>Senior Manager, Digital Health & Product — reach52</li>
+              <li>Lead a team of web & Android engineers</li>
+              <li>Agile delivery: stand‑ups, sprints, user stories</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Focus areas</h3>
+            <ul class="list">
+              <li>AI assistants for CHWs & researchers</li>
+              <li>Offline‑first health data systems</li>
+              <li>Monitoring, Evaluation & Learning (MEL)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Education</h3>
+            <ul class="list">
+              <li>MPA — NUS, Lee Kuan Yew School</li>
+              <li>MSc Global Health — Uppsala University</li>
+              <li>MBBS — Univ. of Medicine, Mandalay</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Recent work highlights</h3>
+            <ul class="list">
+              <li>Scaled AI‑powered health solutions and campaigns across 6 countries</li>
+              <li>Directed a multi‑country portfolio exceeding US$1.5M</li>
+              <li>Built dashboards and decision systems for immunization and NCD programs</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Find me online</h3>
+            <p class="muted">For privacy, direct contact details are omitted. Connect with me here:</p>
+            <p><a class="pill" href="https://www.linkedin.com/in/aungpaingsoe/" target="_blank" rel="noopener">🔗 LinkedIn Profile</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about-course">
+      <div class="container">
+        <h2 class="section-title">About the course</h2>
+        <p class="section-desc">An 8‑week live cohort, <em>Generative AI for Work & Research</em> focuses on no‑code tools, practical automations, and communication for research impact. Led by instructors and mentors from the GRAPH Network, University of Geneva.</p>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <span class="pill">Bootcamp features</span>
+            <ul class="list">
+              <li>Weekly live workshops & help sessions</li>
+              <li>Personalized feedback & capstone coaching</li>
+              <li>Private community + lifetime tutorial access</li>
+              <li>Shareable certificate</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Grading rubric</span>
+            <ul class="list">
+              <li>Online quizzes — 15%</li>
+              <li>Assignments — 35%</li>
+              <li>Attendance & participation — 10%</li>
+              <li>Final project — 40% (pass ≥ 80%)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Attendance</span>
+            <ul class="list">
+              <li>Attend ≥ 5 workshops for full credit</li>
+              <li>Global, supportive learning ecosystem</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3 style="margin:0 0 6px">Modules at a glance</h3>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 1 — Websites, Documents & Presentations:</strong> Generate Markdown/LaTeX/HTML, build simple research sites, and craft clear slides.</div>
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 2 — AI‑Automated Data Analysis:</strong> Use ChatGPT Code Interpreter, Julius & TheBricks to process data and create automated reports.</div>
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 3 — GenAI for Research & Text Analysis:</strong> Literature reviews with Elicit/LiteRev, text classification & summarization workflows.</div>
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 4 — Custom GPTs & Chatbots:</strong> Chat architecture, context windows, RAG, and Botpress integrations.</div>
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 5 — AI for Task Automation:</strong> Email automations, agent‑based flows, and browser control agents.</div>
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 6 — Communication & Outreach:</strong> Figures/diagrams, video abstracts, and scheduling content for dissemination.</div>
+            <div class="tl-item"><div class="tl-dot"></div><strong>Module 7 — Capstone & Showcase:</strong> Progress checks, peer feedback, and public presentations.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="submissions">
+      <div class="container">
+        <h2 class="section-title">My weekly submissions</h2>
+        <p class="section-desc">Links will be added as each assignment is finalized. For now, these are placeholders to keep the structure tidy.</p>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          
+          <!-- Weeks 1–8 placeholders -->
+          <article class="card">
+            <h3>Week 1 — Research Website</h3>
+            <p class="muted">Markdown → HTML site & presentation deck.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 2 — Automated Analysis</h3>
+            <p class="muted">Notebook with charts & an auto‑generated report.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 3 — Text Mining</h3>
+            <p class="muted">Literature review pipeline + topic map.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 4 — Custom GPT/RAG</h3>
+            <p class="muted">Prototype assistant for research Q&A.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 5 — Automation Flow</h3>
+            <p class="muted">Email triage & monitoring agents.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 6 — Sci‑Comm Assets</h3>
+            <p class="muted">Figures, diagrams, and a video abstract.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 7 — Capstone Progress</h3>
+            <p class="muted">Peer feedback & iteration notes.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+          <article class="card">
+            <h3>Week 8 — Final Showcase</h3>
+            <p class="muted">Recorded demo + slides + write‑up.</p>
+            <a class="btn" href="#">Coming soon</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Aung Paing Soe — Portfolio</div>
+      <div class="muted">Built without frameworks. Styled with gradients & glass.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
